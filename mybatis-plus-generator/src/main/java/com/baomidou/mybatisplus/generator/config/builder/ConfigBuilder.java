@@ -26,6 +26,7 @@ import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.querys.H2Query;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.google.common.base.CaseFormat;
 
 import java.io.File;
 import java.sql.Connection;
@@ -103,6 +104,7 @@ public class ConfigBuilder {
      * 是否支持注释
      */
     private boolean commentSupported;
+    private String caseFormatServiceName;
     /**
      * 过滤正则
      */
@@ -355,8 +357,10 @@ public class ConfigBuilder {
             }
             if (StringUtils.isNotBlank(globalConfig.getServiceName())) {
                 tableInfo.setServiceName(String.format(globalConfig.getServiceName(), entityName));
+                tableInfo.setCaseFormatServiceName(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, tableInfo.getServiceName()));
             } else {
                 tableInfo.setServiceName("I" + entityName + ConstVal.SERVICE);
+                tableInfo.setCaseFormatServiceName(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, tableInfo.getServiceName()));
             }
             if (StringUtils.isNotBlank(globalConfig.getServiceImplName())) {
                 tableInfo.setServiceImplName(String.format(globalConfig.getServiceImplName(), entityName));

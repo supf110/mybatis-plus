@@ -48,6 +48,9 @@ public class TableInfo {
     private String serviceName;
     private String serviceImplName;
     private String controllerName;
+    private String caseFormatServiceName;
+
+
     private List<TableField> fields;
     /**
      * 公共字段
