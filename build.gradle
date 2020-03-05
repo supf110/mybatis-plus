@@ -79,7 +79,8 @@ ext {
         "swagger-annotations"        : "io.swagger:swagger-annotations:1.6.0",
         //cache
         "mybatis-ehcache"            : "org.mybatis.caches:mybatis-ehcache:1.2.0",
-        "mybatis-redis"              : "org.mybatis.caches:mybatis-redis:1.0.0-beta2"
+        "mybatis-redis"              : "org.mybatis.caches:mybatis-redis:1.0.0-beta2",
+        "guava"                      : "com.google.guava:guava:21.0"
     ]
 }
 

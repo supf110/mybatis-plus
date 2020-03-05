@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -209,7 +210,7 @@ public abstract class AbstractTemplateEngine {
         objectMap.put("activeRecord", globalConfig.isActiveRecord());
         objectMap.put("kotlin", globalConfig.isKotlin());
         objectMap.put("swagger2", globalConfig.isSwagger2());
-        objectMap.put("date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        objectMap.put("date", LocalDateTime.now().toString());
         objectMap.put("table", tableInfo);
         objectMap.put("enableCache", globalConfig.isEnableCache());
         objectMap.put("baseResultMap", globalConfig.isBaseResultMap());
