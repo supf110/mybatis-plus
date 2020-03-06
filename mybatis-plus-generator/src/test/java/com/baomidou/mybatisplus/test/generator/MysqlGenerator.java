@@ -58,15 +58,19 @@ public class MysqlGenerator extends GeneratorTest {
         // 自定义需要填充的字段
         List<TableFill> tableFillList = new ArrayList<>();
         tableFillList.add(new TableFill("ASDD_SS", FieldFill.INSERT_UPDATE));
-        String userDir = System.getProperty("user.dir");
         String outPutDir = "C:/xycode/xygit/yqfk/src/main/java";
+        String dbUrl = "jdbc:mysql://192.168.99.100:3306/xy_epj?useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8";
+        String[] tables = {"hospital_import_task"};
+        String model = "abx";
+        String packages = "org.springblade.modules";
+        String allPath = packages +"."+model;
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator().setGlobalConfig(
             // 全局配置
             new GlobalConfig()
                 .setOutputDir(outPutDir)//输出目录
                 .setFileOverride(true)// 是否覆盖文件
-                .setActiveRecord(true)// 开启 activeRecord 模式
+                .setActiveRecord(false)// 开启 activeRecord 模式
                 .setEnableCache(false)// XML 二级缓存
                 .setBaseResultMap(true)// XML ResultMap
                 .setBaseColumnList(true)// XML columList
@@ -111,7 +115,7 @@ public class MysqlGenerator extends GeneratorTest {
                 .setDriverName(Driver.class.getName())
                 .setUsername("root")
                 .setPassword("123456")
-                .setUrl("jdbc:mysql://192.168.99.100:3306/xy_epj?useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8")
+                .setUrl(dbUrl)
         ).setStrategy(
             // 策略配置
             new StrategyConfig()
@@ -119,7 +123,7 @@ public class MysqlGenerator extends GeneratorTest {
                 // .setDbColumnUnderline(true)//全局下划线命名
 //                .setTablePrefix(new String[]{"bmd_", "mp_"})// 此处可以修改为您的表前缀
                 .setNaming(NamingStrategy.underline_to_camel)// 表名生成策略
-                .setInclude(new String[] { "school_admin_data", "school_condition", "school_dept"}) // 需要生成的表
+                .setInclude(tables) // 需要生成的表
                 // .setExclude(new String[]{"test"}) // 排除生成的表
                 // 自定义实体父类
                 // .setSuperEntityClass("com.baomidou.demo.TestEntity")
@@ -150,8 +154,8 @@ public class MysqlGenerator extends GeneratorTest {
         ).setPackageInfo(
             // 包配置
             new PackageConfig()
-                .setModuleName("schoolXXX")
-                .setParent("org.springblade.modules")// 自定义包路径
+                .setModuleName(model)
+                .setParent(packages)// 自定义包路径
                 .setController("controller")// 这里是控制器包名，默认 web
         ).setCfg(
             // 注入自定义配置，可以在 VM 中使用 cfg.abc 设置的值
@@ -175,13 +179,13 @@ public class MysqlGenerator extends GeneratorTest {
                 new FileOutConfig("/templates/entityVO.java.vm") {
                     @Override
                     public String outputFile(TableInfo tableInfo) {
-                        return outPutDir + "/" + "org.springblade.modules.schoolXXX".replace(".", "/") + "/" + "vo" + "/" + tableInfo.getEntityName() + "VO" + StringPool.DOT_JAVA;
+                        return outPutDir + "/" + allPath.replace(".", "/") + "/" + "vo" + "/" + tableInfo.getEntityName() + "VO" + StringPool.DOT_JAVA;
                     }
                 },
                 new FileOutConfig("/templates/entityDTO.java.vm") {
                     @Override
                     public String outputFile(TableInfo tableInfo) {
-                        return outPutDir + "/" + "org.springblade.modules.schoolXXX".replace(".", "/") + "/" + "dto" + "/" + tableInfo.getEntityName() + "DTO" + StringPool.DOT_JAVA;
+                        return outPutDir + "/" + allPath.replace(".", "/") + "/" + "dto" + "/" + tableInfo.getEntityName() + "DTO" + StringPool.DOT_JAVA;
                     }
                 }
 
