@@ -60,8 +60,8 @@ public class MysqlGenerator extends GeneratorTest {
         tableFillList.add(new TableFill("ASDD_SS", FieldFill.INSERT_UPDATE));
         String outPutDir = "C:/xycode/xygit/yqfk/src/main/java";
         String dbUrl = "jdbc:mysql://192.168.99.100:3306/xy_epj?useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8";
-        String[] tables = {"hospital_import_task"};
-        String model = "abx";
+        String[] tables = {"person_modify_task", "person_modify_task_log"};
+        String model = "epj.admin";
         String packages = "org.springblade.modules";
         String allPath = packages +"."+model;
         // 代码生成器
